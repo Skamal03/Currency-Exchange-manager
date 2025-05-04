@@ -42,9 +42,9 @@ def main():
         elif choice == '5':
             rates = manager.get_rates()
             for r in rates:
-                print(f"{r['from_currency']} -> {r['to_currency']}: {r['rate']}")
+                print(f"{r[0]} -> {r[1]}: {r[2]}")
+
         elif choice == '0':
-            manager.close()
             break
         else:
             print("Invalid choice. Try again.")
