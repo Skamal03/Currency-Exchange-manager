@@ -1,0 +1,34 @@
+CREATE DATABASE IF NOT EXISTS currency_exchange_manager;
+USE currency_exchange_manager;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS currencies (
+    code CHAR(3) PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS exchange_rates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    from_currency CHAR(3),
+    to_currency CHAR(3),
+    rate DECIMAL(10, 4),
+    FOREIGN KEY (from_currency) REFERENCES currencies(code),
+    FOREIGN KEY (to_currency) REFERENCES currencies(code)
+);
+
+CREATE TABLE IF NOT EXISTS transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    from_currency CHAR(3),
+    to_currency CHAR(3),
+    amount DECIMAL(10, 2),
+    exchanged_amount DECIMAL(10, 2),
+    rate_used DECIMAL(10, 4),
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
