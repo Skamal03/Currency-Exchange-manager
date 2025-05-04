@@ -35,7 +35,7 @@ class ExchangeManager:
         self.conn.commit()
 
     def get_rates(self):
-        self.cursor.execute("SELECT * FROM exchange_rates")
+        self.cursor.execute("SELECT from_currency, to_currency, rate FROM exchange_rates")
         return self.cursor.fetchall()
 
     def close(self):
