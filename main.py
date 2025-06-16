@@ -1,14 +1,24 @@
 # main.py
-from admin import admin_interface
-from user import user_interface
+from admin import AdminGUI
+from user import UserGUI
+import tkinter as tk
 
-print("Welcome to Currency Exchange Manager")
-role=input("Login as (admin/user): ").strip().lower()
+def main():
+    print("Welcome to Currency Exchange Manager")
+    role = input("Login as (admin/user): ").strip().lower()
 
-if role=='admin':
-    admin_interface()
-elif role=='user':
-    user_interface()
-else:
-    print("Invalid role. Exiting.")
+    root = tk.Tk()
+    root.geometry("800x500")
 
+    if role == 'admin':
+        app = AdminGUI(root)
+    elif role == 'user':
+        app = UserGUI(root)
+    else:
+        print("Invalid role. Exiting.")
+        return
+
+    root.mainloop()
+
+
+main()
